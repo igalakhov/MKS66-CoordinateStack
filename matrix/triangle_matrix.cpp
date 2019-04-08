@@ -6,9 +6,9 @@
 
 TriangleMatrix::TriangleMatrix() : UnitMatrix(3) {}
 
-void TriangleMatrix::add_triangle(float x0, float y0, float z0,
-                                  float x1 , float y1, float z1,
-                                  float x2, float y2, float z2) {
+void TriangleMatrix::add_triangle(float_mat x0, float_mat y0, float_mat z0,
+                                  float_mat x1 , float_mat y1, float_mat z1,
+                                  float_mat x2, float_mat y2, float_mat z2) {
     add_unit({x0, y0, z0, x1, y1, z1, x2, y2, z2});
 }
 

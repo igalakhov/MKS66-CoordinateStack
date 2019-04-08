@@ -17,21 +17,24 @@
 class Drawer : public Display {
 public:
     Drawer(); // constructor
+    ~Drawer(); // destructor
 
     // drawing basics
     void draw_points(PointMatrix *);
     void draw_edges(EdgeMatrix * );
     void draw_polygons(TriangleMatrix *);
 
-    void draw_line(int, int, int, int);
-    void draw_rectangle(int, int, int, int);
+    void draw_line(int, int, float_mat, int, int, float_mat);
+    void scan_line(float_mat *, float_mat *, float_mat *);
     void change_color(unsigned char, unsigned char, unsigned char);
-    void set(int, int); // set a specific point to the current color
+    void set(int, int, float_mat); // set a specific point to the current color
 
 protected:
 
 private:
     struct color cur_color; // current drawing color
+
+    float_mat * z_buffer;
 };
 
 

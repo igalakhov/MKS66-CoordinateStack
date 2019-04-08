@@ -1,5 +1,5 @@
-all: main.o drawer.o display.o edge_matrix.o transformation_matrix.o mdl_parser.o obj_parser.o parametric.o 3d.o unit_matrix.o triangle_matrix.o point_matrix.o vector_utils.o
-	g++ -std=c++11 -o main.out main.o drawer.o display.o edge_matrix.o transformation_matrix.o mdl_parser.o obj_parser.o parametric.o 3d.o unit_matrix.o triangle_matrix.o point_matrix.o vector_utils.o
+all: main.o drawer.o display.o edge_matrix.o transformation_matrix.o mdl_parser.o obj_parser.o parametric.o 3d.o unit_matrix.o triangle_matrix.o point_matrix.o vector_utils.o coordinate_stack.o
+	g++ -std=c++11 -o main.out main.o drawer.o display.o edge_matrix.o transformation_matrix.o mdl_parser.o obj_parser.o parametric.o 3d.o unit_matrix.o triangle_matrix.o point_matrix.o vector_utils.o coordinate_stack.o
 	./main.out
 
 main.o: main.cpp settings.h
@@ -27,7 +27,10 @@ transformation_matrix.o: matrix/transformation_matrix.cpp matrix/transformation_
 	g++ -std=c++11 -c matrix/transformation_matrix.cpp
 
 mdl_parser.o: parsing/mdl/mdl_parser.cpp matrix/transformation_matrix.h matrix/edge_matrix.h drawing/drawer.h settings.h
-	g++ -std=c++11 -c parsing/mdl_parser.cpp
+	g++ -std=c++11 -c parsing/mdl/mdl_parser.cpp
+
+coordinate_stack.o: parsing/mdl/coordinate_stack.cpp parsing/mdl/coordinate_stack.h
+	g++ -std=c++11 -c parsing/mdl/coordinate_stack.cpp
 
 obj_parser.o: parsing/obj_parser.h matrix/edge_matrix.h settings.h
 	g++ -std=c++11 -c parsing/obj_parser.cpp

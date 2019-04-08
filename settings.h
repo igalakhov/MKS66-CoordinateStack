@@ -5,13 +5,14 @@
 
 // 3d stuff
 #define ENABLE_BACKFACE_CULLING true
+#define Z_BUFFER_MIN -1000
 
 #define SPHERE_NUM_STEPS 25
 #define TORUS_NUM_STEPS 25
 
 // matrix stuff
 
-#define float_mat float // TODO: figure out which type is the best here
+#define float_mat double // TODO: figure out which type is the best here
 
 // image stuff
 

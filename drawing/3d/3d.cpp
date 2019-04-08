@@ -54,7 +54,8 @@ void add_torus(TriangleMatrix * m, float tx, float ty, float tz, float r, float 
 
         m->add_triangle(s[p1 + 0], s[p1 + 1], s[p1 + 2],
                         s[p2 + 0], s[p2 + 1], s[p2 + 2],
-                        s[p3 + 0], s[p3 + 1], s[p3 + 2]);
+                        s[p4 + 0], s[p4 + 1], s[p4 + 2]);
+
         m->add_triangle(s[p1 + 0], s[p1 + 1], s[p1 + 2],
                         s[p4 + 0], s[p4 + 1], s[p4 + 2],
                         s[p3 + 0], s[p3 + 1], s[p3 + 2]);
@@ -105,7 +106,8 @@ void add_sphere(TriangleMatrix * m, float cx, float cy, float cz, float r){
 
     for(int i = 0; i < num_points; i++){
         // skip the end faces
-        if(i % (SPHERE_NUM_STEPS + 1) == 0 or i % (SPHERE_NUM_STEPS + 1) == SPHERE_NUM_STEPS)
+
+        if(i % (SPHERE_NUM_STEPS + 1) == SPHERE_NUM_STEPS or i % (SPHERE_NUM_STEPS + 1) == SPHERE_NUM_STEPS - 0 or i % (SPHERE_NUM_STEPS + 1) == SPHERE_NUM_STEPS - 0)
             continue; // TODO: fix this when you have to do lighting
 
         p1 = i*4;
@@ -113,10 +115,12 @@ void add_sphere(TriangleMatrix * m, float cx, float cy, float cz, float r){
         p3 = ((i + 1 + SPHERE_NUM_STEPS) % num_points) * 4;
         p4 = ((i + 2 + SPHERE_NUM_STEPS) % num_points) * 4;
 
-        m->add_triangle(s[p1 + 0], s[p1 + 1], s[p1 + 2],
-                        s[p4 + 0], s[p4 + 1], s[p4 + 2],
-                        s[p3 + 0], s[p3 + 1], s[p3 + 2]);
+        if(i % (SPHERE_NUM_STEPS + 1) != 0)
+            m->add_triangle(s[p1 + 0], s[p1 + 1], s[p1 + 2],
+                            s[p4 + 0], s[p4 + 1], s[p4 + 2],
+                            s[p3 + 0], s[p3 + 1], s[p3 + 2]);
 
+        if(i % (SPHERE_NUM_STEPS + 1) != SPHERE_NUM_STEPS - 1)
         m->add_triangle(s[p1 + 0], s[p1 + 1], s[p1 + 2],
                         s[p2 + 0], s[p2 + 1], s[p2 + 2],
                         s[p4 + 0], s[p4 + 1], s[p4 + 2]);

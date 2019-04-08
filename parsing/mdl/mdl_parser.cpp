@@ -183,6 +183,10 @@ void MDLParser::run_file(EdgeMatrix * edge_matrix, TriangleMatrix * triangle_mat
             //throw std::invalid_argument("Invalid command [" + str + "]");
         }
 
+//        cstack->print_stack();
+//
+//        std::cout << "\n ------------- \n";
+
     }
 }
 

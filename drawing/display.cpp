@@ -51,17 +51,29 @@ void Display::display(){
 
 }
 
-void Display::set(int x, int y, struct color * to_set){
-    assert((y*IMAGE_WIDTH + x) < NUM_PIXELS);
+void Display::set(int x, int y, float_mat z, struct color * to_set){
 
-    unsigned char * cur = values + ((y*IMAGE_WIDTH) + x)*3;
+    if(x < 0 or x > IMAGE_WIDTH - 1 or y < 0 or y > IMAGE_HEIGHT - 1)
+        return;
 
-    // "efficiency"
-    *cur = to_set->r;
-    cur++;
-    *cur = to_set->g;
-    cur++;
-    *cur = to_set->b;
+    if(z_buffer[y*IMAGE_HEIGHT + x] < z) {
+        unsigned char *cur = values + ((y * IMAGE_WIDTH) + x) * 3;
+
+        // "efficiency"
+        *cur = to_set->r;
+        cur++;
+        *cur = to_set->g;
+        cur++;
+        *cur = to_set->b;
+
+        z_buffer[y*IMAGE_HEIGHT + x] = z;
+
+    }
+//    if (x == 360 and y == 128){
+//        std::cout << z << std::endl;
+//        std::cout << z_buffer[130 * IMAGE_HEIGHT + 260] << std::endl;
+//    }
+
 
 }
 
@@ -90,6 +102,11 @@ void Display::save(std::string file_name, std::string){
 // constructor
 Display::Display() {
     values = new unsigned char[NUM_PIXELS * 3];
+    z_buffer = new float_mat[NUM_PIXELS];
+
+
+    for(int i = 0; i < NUM_PIXELS; i++)
+        z_buffer[i] = Z_BUFFER_MIN;
 
     unsigned char *cur = values;
 
